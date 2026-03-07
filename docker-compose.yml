@@ -1,0 +1,23 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-tp01
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: always
+
+  # ADD THIS SECTION BELOW
+  laravel-agent:
+    image: jenkins/ssh-agent:latest
+    container_name: jenkins-laravel-agent
+    privileged: true
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWJu8CBnlsFraEPgoVFzncauSqCM9WS5WiNdNoUunOKw2Eo2K3+3ub4/OIbgRjmaAwGP9WGa2xoIGQo4nZKMngAe/rg7yrDt7M0a7u9uJrSl12btWlUZ1OiLRp83peCh/w2eUx4M547+nkWYRzS3OPC4m5tmDlSkhk/gD7g9viHUdSnM16XUDT6NEnPWTCMsz6KZQw3OeNFSY9gYcKRy6mTl4eGLRd7lXjV3wruLktDa4uXddniYcf9iUthtoHXxe5Cw9A0dwWxIMJS76GvsdQoRnzmT0yvffTvq1wVTloGkf67XpB0JGvPLc6ru/njp97+kaG2GFYfMvaYDbk2x3LBPGwWK7ri8ED7M2L7Yp3WQxSjPnoB+upApdIs9FN33FE3GvE8GxVygyBx5yMLrkEi+Kg+M2sMZ+9KsR65Cj8z8zLyQb8A+Dg7PnNm3Ms62WZvF9yWgix/V7bd2ayTLQbOtg5Oc5pYvaGwYIhkubpD/9Q6Bktc2sVRq3K5eCTz/U= macbook@MacBooks-MacBook-Pro-2.local
+    networks:
+      - default
+
+volumes:
+  jenkins_home:
