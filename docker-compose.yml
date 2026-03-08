@@ -1,4 +1,7 @@
+version: "3"
+
 services:
+
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins-tp01
@@ -9,15 +12,12 @@ services:
       - jenkins_home:/var/jenkins_home
     restart: always
 
-  # ADD THIS SECTION BELOW
   laravel-agent:
-    image: jenkins/ssh-agent:latest
+    build: .
     container_name: jenkins-laravel-agent
     privileged: true
     environment:
-      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWJu8CBnlsFraEPgoVFzncauSqCM9WS5WiNdNoUunOKw2Eo2K3+3ub4/OIbgRjmaAwGP9WGa2xoIGQo4nZKMngAe/rg7yrDt7M0a7u9uJrSl12btWlUZ1OiLRp83peCh/w2eUx4M547+nkWYRzS3OPC4m5tmDlSkhk/gD7g9viHUdSnM16XUDT6NEnPWTCMsz6KZQw3OeNFSY9gYcKRy6mTl4eGLRd7lXjV3wruLktDa4uXddniYcf9iUthtoHXxe5Cw9A0dwWxIMJS76GvsdQoRnzmT0yvffTvq1wVTloGkf67XpB0JGvPLc6ru/njp97+kaG2GFYfMvaYDbk2x3LBPGwWK7ri8ED7M2L7Yp3WQxSjPnoB+upApdIs9FN33FE3GvE8GxVygyBx5yMLrkEi+Kg+M2sMZ+9KsR65Cj8z8zLyQb8A+Dg7PnNm3Ms62WZvF9yWgix/V7bd2ayTLQbOtg5Oc5pYvaGwYIhkubpD/9Q6Bktc2sVRq3K5eCTz/U= macbook@MacBooks-MacBook-Pro-2.local
-    networks:
-      - default
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDpmWeF3Fulinxy1q4OC1YspJx2XaApus6ENpm9Z7qpBML6CGmApsOmldkzzAkXQpGqj3T8M3Ed827wYA1HD1dg2t6nepGnZbaUfSGc/U3Dv2ok8jW0vdV5U5R6fevficynBukCMSRcKBqg3K7oDUym5CeyYF8olZKlGkrvPBWJAj/Kr6bulBYGck7uJHpM7Rs9FjctZw8pX0ckC5izU2nq63XIY4kqmZHOGoWHTp6r5xNGUWuhsAOeTXmdSMhL2bduoZcybPvtqnhdtGS9bIxaD9yt7YGbUi40ej9FDpPcU3S+WzMmWcd6x9ZD6FVBuOmHgSGnCSAeAsj/5LAcuf98/+lAPH+vLqGTVvYMETULTgic1lJASlwmf7tK42RO+mc2dx6nV/+a4wZKIpA7zlfJz5s2tMfVdLU3SnZFmReZKcYpfoBobEEjbTvwz6EoP/ZmxnWTMLdunX0i1HTtXmahvMRTrw3Rf9XAik2576G/tsFnV5psP+gYu93pEqYc2tvqJgVGQJU/+bTZKVaoKLkUbG/AY/sbaZmAz/AhtVrTShetrggDTHlmfKx5w/Gw6nwyjnk/yFvUM4EQS0v9t6MmcZ8Zvjf4COLJvvdn0DnBfstzYkMDtG6/Ys1PLZqSuaqst4YvJ8S1SYWpZv5WIf4A+SgGxlM9Njnhr4NOqIWLiQ== macbook@MacBooks-MacBook-Pro-2.local
 
 volumes:
   jenkins_home:
